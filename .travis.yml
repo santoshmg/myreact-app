@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run kacharya/myreact-app npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-myreact-app"
+  env: "DockerMyreactApp-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-079900002688"
+  bucket_path: "docker-myreact-app"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_aceess_key:
+    secure: "$AWS_SECRET_KEY"
